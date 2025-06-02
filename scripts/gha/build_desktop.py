@@ -160,6 +160,9 @@ def cmake_configure(build_dir, arch, msvc_runtime_library='static', linux_abi='l
   """
   cmd = ['cmake', '-S', '.', '-B', build_dir]
 
+  cmd.append('-DCMAKE_INSTALL_PREFIX=/home/david/opt/firebase_sdk')
+  cmd.append('-DFIREBASE_CPP_BUILD_PACKAGE=ON')
+
   # If generator is not specifed, default for platform is used by cmake, else
   # use the specified value
   if config:
