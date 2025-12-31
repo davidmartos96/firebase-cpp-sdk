@@ -19,6 +19,8 @@ cmake_minimum_required (VERSION 3.1)
 set (CMAKE_CXX_STANDARD 14)
 set (CMAKE_CXX_STANDARD_REQUIRED YES)  # Don't fall back to an earlier version.
 
+set (CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # Turn on virtual folders for visual studio
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -72,7 +74,7 @@ option(FIREBASE_CPP_USE_PRIOR_GRADLE_BUILD
        "When building with Gradle, use the previously built libraries." OFF)
 option(FIREBASE_USE_BORINGSSL
        "Build against BoringSSL instead of using your system's OpenSSL." OFF)
-option(FIREBASE_USE_LINUX_CXX11_ABI
+option(FIREBASE_LINUX_USE_CXX11_ABI
        "Build Linux SDK using the C++11 ABI instead of the legacy ABI." OFF)
 
 # This should only be enabled by the GitHub Action build script.
@@ -265,7 +267,7 @@ endif()
 
 if(DESKTOP)
   # Use the static versions of the OpenSSL libraries.
-  set(OPENSSL_USE_STATIC_LIBS TRUE)
+  set(OPENSSL_USE_STATIC_LIBS OFF)
   if (MSVC)
     # Get the correct version of the OpenSSL libraries based on building for MT.
     if ("${CMAKE_CXX_FLAGS_DEBUG}" MATCHES "/MTd" OR
@@ -405,6 +407,7 @@ endif()
 if(DESKTOP)
   # Build curl as a static library
   set(CURL_STATICLIB ON CACHE BOOL "")
+  set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build curl statically")
   if (WIN32)
     # Enable Windows native SSL/TLS in libcurl.
     set(CMAKE_USE_SCHANNEL ON CACHE BOOL "")
