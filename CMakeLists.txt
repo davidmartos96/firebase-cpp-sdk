@@ -406,6 +406,7 @@ endif()
 if(DESKTOP)
   # Build curl as a static library
   set(CURL_STATICLIB ON CACHE BOOL "")
+  set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build curl statically")
   if (WIN32)
     # Enable Windows native SSL/TLS in libcurl.
     set(CMAKE_USE_SCHANNEL ON CACHE BOOL "")

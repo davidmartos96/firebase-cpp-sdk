@@ -1,6 +1,6 @@
 # Build
 
-python scripts/gha/build_desktop.py --linux_abi="c++11" --config="Debug"
+python scripts/gha/build_desktop.py --linux_abi="c++11" --config="Release"
 
 # Install and tar
 

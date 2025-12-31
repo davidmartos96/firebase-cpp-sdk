@@ -160,6 +160,14 @@ def cmake_configure(build_dir, arch, msvc_runtime_library='static', linux_abi='l
   """
   cmd = ['cmake', '-S', '.', '-B', build_dir]
 
+  # cmd.append('-DCMAKE_C_COMPILER=gcc-14')
+  # cmd.append('-DCMAKE_CXX_COMPILER=g++-14')
+
+  # Don't build all modules, just auth and analytics (which is required by auth)
+  cmd.append('-DFIREBASE_INCLUDE_LIBRARY_DEFAULT=OFF')
+  cmd.append('-DFIREBASE_INCLUDE_AUTH=ON')
+  cmd.append('-DFIREBASE_INCLUDE_ANALYTICS=ON')
+
   cmd.append('-DCMAKE_INSTALL_PREFIX=/home/david/opt/firebase_sdk')
   cmd.append('-DFIREBASE_CPP_BUILD_PACKAGE=ON')
 
